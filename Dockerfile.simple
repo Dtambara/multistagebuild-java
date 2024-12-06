@@ -1,0 +1,15 @@
+FROM maven:3.9.9-eclipse-temurin-17-focal
+
+WORKDIR /app
+COPY ./helloWorld /app
+
+RUN mvn clean package
+
+RUN mv /app/target/*.jar /app.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java","-jar","/app.jar", "-Ddebug", "-Xmx128m"]
+
+
+#danilotambara/multistage-build-java
